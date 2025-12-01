@@ -16,20 +16,17 @@ public class JobController {
     @Autowired
     private JobService service;
 
-
     @GetMapping({"/", "home"})
     public String home() {
 
         return "home";
     }
 
-
     @GetMapping("addjob")
     public String addJob() {
 
         return "addjob";
     }
-
 
     @PostMapping("handleForm")
     public String handleForm(JobPost jobPost) {
@@ -39,11 +36,16 @@ public class JobController {
     }
 
     @GetMapping("viewalljobs")
-    public String viewJobs(Model m) {
+    public String viewJobs(Model m){
         List<JobPost> jobs = service.getAllJobs();
         m.addAttribute("jobPosts", jobs);
-
         return "viewalljobs";
+    }
+
+    @GetMapping("load")
+    public String load() {
+        service.load();
+        return "success";   // or any page you want
     }
 
 }
